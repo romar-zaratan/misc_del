@@ -71,7 +71,7 @@ const D=[
 ["Which AAA component can be established using token cards?",["accounting","authentication","authorization","auditing"],[1]],
 ["What is a characteristic of the security artichoke, defense-in-depth approach?",["Threat actors can easily compromise all layers safeguarding the data or systems.","Threat actors no longer have to peel away each layer before reaching the target data or system.","Threat actors can no longer penetrate any layers safeguarding the data or system.","Each layer has to be penetrated before the threat actor can reach the target data or system."],[1]],
 ["What is a characteristic of a layered defense-in-depth security approach?",["Three or more devices are used.","Routers are replaced with firewalls.","When one device fails, another one takes over.","One safeguard failure does not affect the effectiveness of other safeguards."],[3]],
-["What is the principle behind the nondiscretionary access control model?",["It allows users to control access to their data as owners of that data.","It allows access based on attributes of the object be to accessed.","It allows access decisions to be based on roles and responsibilities of a user within the organization.","It applies the strictest access control possible."],[2]],
+["What is the principle behind the nondiscretionary access control model?",["It allows users to control access to their data as owners of that data.","It allows access based on attributes of the object be to accessed.","It allows access decisions based on roles and responsibilities of a user within the organization.","It applies the strictest access control possible."],[2]],
 ["Passwords, passphrases, and PINs are examples of which security term?",["identification","authorization","access","authentication"],[3]],
 ["Which statement describes Trusted Automated Exchange of Indicator Information (TAXII)?",["It is a set of specifications for exchanging cyber threat information between organizations.","It is the specification for an application layer protocol that allows the communication of CTI over HTTPS.","It is a dynamic database of real-time vulnerabilities.","It is a signature-less engine utilizing stateful attack analysis to detect zero-day threats."],[1]],
 ["What is the primary function of the Center for Internet Security (CIS)?",["to provide vendor-neutral education products and career services to industry professionals worldwide","to offer 24×7 cyberthreat warnings and advisories, vulnerability identification, and mitigation and incident responses","to provide a security news portal that aggregates the latest breaking news pertaining to alerts, exploits, and vulnerabilities","to maintain a list of common vulnerabilities and exposures (CVE) used by security organizations"],[1]],
@@ -123,56 +123,4 @@ function render(){
   const [q,o,a,note]=D[qi];const multi=a.length>1;
   const s=sel[qi]||(sel[qi]=new Set());
   const c=document.createElement('div');c.className='card';
-  const progress=document.createElement('div');progress.className='progress';
-  progress.innerHTML='<span>Question '+(current+1)+' of '+order.length+'</span><span class="progress-track"><span style="width:'+(((current+1)/order.length)*100)+'%"></span></span>';
-  c.appendChild(progress);
-  const h=document.createElement('p');h.className='q';h.textContent=(current+1)+'. '+q;c.appendChild(h);
-  o.forEach((t,j)=>{
-    const b=document.createElement('button');b.className='opt';b.textContent=t;
-    if(reveal&&a.includes(j))b.classList.add('ok');
-    else if((done||reviewed[qi])&&s.has(j))b.classList.add('bad');
-    else if(!reveal&&s.has(j))b.classList.add('on');
-    b.onclick=()=>{if(reveal)return;if(multi){s.has(j)?s.delete(j):s.add(j)}else{s.clear();s.add(j)}render()};
-    c.appendChild(b);
-  });
-  if(note&&reveal){const p=document.createElement('p');p.className='note';p.textContent=note;c.appendChild(p)}
-  el.appendChild(c);
-
-  const nav=document.createElement('div');nav.className='navigation';
-  const prev=document.createElement('button');prev.className='btn';prev.textContent='Previous';prev.disabled=current===0;prev.onclick=()=>{current--;render();window.scrollTo(0,0)};
-  const next=document.createElement('button');next.className='btn pri';
-  next.textContent=reviewed[qi]?(current===order.length-1?'Finished':'Next'):'Show answer';
-  next.disabled=reviewed[qi]&&current===order.length-1;
-  next.onclick=()=>{
-    if(!reviewed[qi]){
-      reviewed[qi]=true;
-      render();
-    }else if(current<order.length-1){
-      current++;
-      render();
-      window.scrollTo(0,0);
-    }
-  };
-  nav.append(prev,next);el.appendChild(nav);
-
-  $('mQuiz').classList.toggle('on',mode==='quiz');
-  $('mStudy').classList.toggle('on',mode==='study');
-  $('sub').style.display=mode==='quiz'?'':'none';
-  $('sub').disabled=done;
-  if(done){const r=D.filter((d,i)=>same(sel[i]||new Set(),d[2])).length;$('score').textContent='Score: '+r+' / '+D.length}
-  else if(mode==='quiz'){const k=Object.values(sel).filter(s=>s.size).length;$('score').textContent='Answered: '+k+' / '+D.length}
-  else $('score').textContent='';
-}
-function setMode(m){mode=m;done=false;sel={};reviewed={};current=0;render();window.scrollTo(0,0)}
-$('mQuiz').onclick=()=>setMode('quiz');
-$('mStudy').onclick=()=>setMode('study');
-$('sub').onclick=()=>{done=true;render();window.scrollTo(0,0)};
-$('rst').onclick=()=>{done=false;sel={};reviewed={};order=D.map((_,i)=>i);current=0;render();window.scrollTo(0,0)};
-$('shuf').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}done=false;sel={};reviewed={};current=0;render();window.scrollTo(0,0)};
-$('dark').onclick=()=>{const r=document.documentElement;const d=r.dataset.theme==='dark';r.dataset.theme=d?'light':'dark';$('dark').textContent=d?'Dark mode':'Light mode'};
-$('acc').oninput=e=>document.documentElement.style.setProperty('--acc',e.target.value);
-if(matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.dataset.theme='dark';$('dark').textContent='Light mode'}
-render();
-</script>
-</body>
-</html>
+  const progress=document.createEle
