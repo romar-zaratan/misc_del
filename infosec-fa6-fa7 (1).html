@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Info Sec FA6 &amp; FA7 Reviewer</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--text:#1d2433;--mute:#667085;--line:#dfe3ec;--acc:#6c5ce7;--ok:#16a34a;--okbg:#dcfce7;--bad:#dc2626;--badbg:#fee2e2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{--bg:#0f1220;--card:#181c2e;--text:#e8eaf3;--mute:#9aa3b8;--line:#2a3047;--okbg:#10351f;--badbg:#3b1414}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:16px}
+h1{font-size:1.5rem;margin:8px 0 2px}
+.sub{color:var(--mute);margin:0 0 12px}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:10px 0;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--line)}
+.bar button,.bar input{font:inherit}
+.btn{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer}
+.btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.on{border-color:var(--acc);box-shadow:inset 0 0 0 1px var(--acc)}
+.btn:focus-visible,.opt:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+#score{margin-left:auto;font-weight:600}
+input[type=color]{width:36px;height:34px;padding:0;border:1px solid var(--line);border-radius:8px;background:var(--card)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+.q{margin:0 0 10px;font-weight:600}
+.note{color:var(--mute);font-size:.85rem;margin-top:8px}
+.opt{display:block;width:100%;text-align:left;font:inherit;color:var(--text);background:transparent;border:1px solid var(--line);border-radius:8px;padding:9px 12px;margin:6px 0;cursor:pointer}
+.opt.on{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,transparent)}
+.opt.ok{border-color:var(--ok);background:var(--okbg);font-weight:600}
+.opt.bad{border-color:var(--bad);background:var(--badbg)}
+.progress{display:flex;align-items:center;gap:12px;color:var(--mute);font-size:.85rem;margin-bottom:14px}
+.progress-track{height:6px;flex:1;background:var(--line);border-radius:99px;overflow:hidden}
+.progress-track span{display:block;height:100%;background:var(--acc);border-radius:99px}
+.navigation{display:flex;justify-content:space-between;gap:10px;margin:14px 0 24px}
+.navigation button{min-width:110px}
+.navigation button:disabled{opacity:.4;cursor:not-allowed}
+</style>
+</head>
+<body>
+<main>
+<h1>Info Sec FA6 &amp; FA7 Reviewer</h1>
+<p class="sub">59 questions. Answers follow the Canvas answer key.</p>
+<div class="bar">
+<button class="btn on" id="mQuiz">Quiz mode</button>
+<button class="btn" id="mStudy">Study mode</button>
+<button class="btn" id="shuf">Shuffle</button>
+<button class="btn pri" id="sub">Check answers</button>
+<button class="btn" id="rst">Reset</button>
+<button class="btn" id="dark">Dark mode</button>
+<input type="color" id="acc" value="#6c5ce7" aria-label="Accent color">
+<span id="score"></span>
+</div>
+<div id="list"></div>
+</main>
+<script>
+const D=[
+["Why is asset management a critical function of a growing organization against security threats?",["It prevents theft of older assets that are decommissioned.","It allows for a build of a comprehensive AUP.","It serves to preserve an audit trail of all new purchases.","It identifies the ever increasing attack surface to threats."],[3]],
+["In a defense-in-depth approach, which three options must be identified to effectively defend a network against attacks? (Choose three.)",["total number of devices that attach to the wired and wireless network","vulnerabilities in the system","location of attacker or attackers","threats to assets","past security breaches","assets that need protection"],[1,3,5]],
+["What is the first line of defense when an organization is using a defense-in-depth approach to network security?",["proxy server","firewall","edge router","IPS"],[2]],
+["What three goals does a BYOD security policy accomplish? (Choose three.)",["identify a list of websites that users are not permitted to access","describe the rights to access and activities permitted to security personnel on the device","identify which employees can bring their own devices","identify and prevent all heuristic virus signatures","identify all malware signatures and synchronize them across corporate databases","identify safeguards to put in place if a device is compromised"],[1,2,5]],
+["Which two options are security best practices that help mitigate BYOD risks? (Choose two.)",["Use wireless MAC address filtering.","Use paint that reflects wireless signals and glass that prevents the signals from going outside the building.","Keep the device OS and software updated.","Only allow devices that have been approved by the corporate IT team.","Only turn on Wi-Fi when using the wireless network.","Decrease the wireless antenna gain level."],[2,4],"Canvas did not show the key for this one (it was the question you missed). This answer is from the standard Cisco key. Double-check it."],
+["What is the purpose of mobile device management (MDM) software?",["It is used to identify potential mobile device vulnerabilities.","It is used by threat actors to penetrate the system.","It is used to create a security policy.","It is used to implement security policies, settings, and software configurations on mobile devices."],[3]],
+["What does the incident handling procedures security policy describe?",["It describes the procedure for mitigating cyberattacks.","It describes how security incidents are handled.","It describes how to prevent various cyberattacks.","It describes the procedure for auditing the network after a cyberattack."],[1]],
+["What is the primary purpose of the Forum of Incident Response and Security Teams (FIRST)?",["to offer 24×7 cyberthreat warnings and advisories, vulnerability identification, and mitigation and incident response","to provide a security news portal that aggregates the latest breaking news pertaining to alerts, exploits, and vulnerabilities","to enable a variety of computer security incident response teams to collaborate, cooperate, and coordinate information sharing, incident prevention, and rapid reaction strategies","to provide vendor neutral education products and career services to industry professionals worldwide"],[2]],
+["What is the primary purpose of the Malware Information Sharing Platform (MISP)?",["to enable automated sharing of IOCs between people and machines using the STIX and other exports formats","to provide a set of standardized schemata for specifying and capturing events and properties of network operations","to exchange all the response mechanisms to known threats","to publish all informational materials on known and newly discovered cyberthreats"],[0]],
+["How does FireEye detect and prevent zero-day attacks?",["by addressing all stages of an attack lifecycle with a signature-less engine utilizing stateful attack analysis","by establishing an authentication parameter prior to any data exchange","by keeping a detailed analysis of all viruses and malware","by only accepting encrypted data packets that validate against their configured hash values"],[0]],
+["What is CybOX?",["It is a catalog of known security threats called Common Vulnerabilities and Exposures (CVE) for publicly known cybersecurity vulnerabilities.","It is a specification for an application layer protocol that allows the communication of CTI over HTTPS.","It enables the real-time exchange of cyberthreat indicators between the U.S. Federal Government and the private sector.","It is a set of standardized schemata for specifying, capturing, characterizing, and communicating events and properties of network operations."],[3]],
+["When designing a prototype network for a new server farm, a network designer chooses to use redundant links to connect to the rest of the network. Which business goal will be addressed by this choice?",["availability","security","scalability","manageability"],[0]],
+["Which component of the zero trust security model focuses on secure access when an API, a microservice, or a container is accessing a database within an application?",["workforce","workplace","workload","workflow"],[2]],
+["What is the purpose of the network security accounting function?",["to determine which resources a user can access","to keep track of the actions of a user","to provide challenge and response questions","to require users to prove who they are"],[1]],
+["What are two characteristics of the RADIUS protocol? (Choose two.)",["encryption of the password only","the use of UDP ports for authentication and accounting","the separation of the authentication and authorization processes","the use of TCP port 49","encryption of the entire body of the packet"],[0,1]],
+["Which AAA component can be established using token cards?",["accounting","authentication","authorization","auditing"],[1]],
+["What is a characteristic of the security artichoke, defense-in-depth approach?",["Threat actors can easily compromise all layers safeguarding the data or systems.","Threat actors no longer have to peel away each layer before reaching the target data or system.","Threat actors can no longer penetrate any layers safeguarding the data or system.","Each layer has to be penetrated before the threat actor can reach the target data or system."],[1]],
+["What is a characteristic of a layered defense-in-depth security approach?",["Three or more devices are used.","Routers are replaced with firewalls.","When one device fails, another one takes over.","One safeguard failure does not affect the effectiveness of other safeguards."],[3]],
+["What is the principle behind the nondiscretionary access control model?",["It allows users to control access to their data as owners of that data.","It allows access based on attributes of the object be to accessed.","It allows access decisions to be based on roles and responsibilities of a user within the organization.","It applies the strictest access control possible."],[2]],
+["Passwords, passphrases, and PINs are examples of which security term?",["identification","authorization","access","authentication"],[3]],
+["Which statement describes Trusted Automated Exchange of Indicator Information (TAXII)?",["It is a set of specifications for exchanging cyber threat information between organizations.","It is the specification for an application layer protocol that allows the communication of CTI over HTTPS.","It is a dynamic database of real-time vulnerabilities.","It is a signature-less engine utilizing stateful attack analysis to detect zero-day threats."],[1]],
+["What is the primary function of the Center for Internet Security (CIS)?",["to provide vendor-neutral education products and career services to industry professionals worldwide","to offer 24×7 cyberthreat warnings and advisories, vulnerability identification, and mitigation and incident responses","to provide a security news portal that aggregates the latest breaking news pertaining to alerts, exploits, and vulnerabilities","to maintain a list of common vulnerabilities and exposures (CVE) used by security organizations"],[1]],
+["A web server administrator is configuring access settings to require users to authenticate first before accessing certain web pages. Which requirement of information security is addressed through the configuration?",["scalability","confidentiality","integrity","availability"],[1]],
+["Which type of access control applies the strictest access control and is commonly used in military or mission critical applications?",["Non-discretionary access control","discretionary access control (DAC)","mandatory access control (MAC)","attribute-based access control (ABAC)"],[2]],
+["How does AIS address a newly discovered threat?",["by creating response strategies against the new threat","by mitigating the attack with active response defense mechanisms","by enabling real-time exchange of cyberthreat indicators with U.S. Federal Government and the private sector","by advising the U.S. Federal Government to publish internal response strategies"],[2]],
+["What is the malicious code that results in some action within a worm attack called?",["Vulnerability","Propagation mechanism","Exploit","Payload"],[3]],
+["Which tool is commonly used to initiate a port scan of active IP addresses?",["John the Ripper","Nmap","Metasploit","Wireshark"],[1]],
+["Which risk management strategy involves avoiding any exposure to risk by eliminating the activity?",["Risk acceptance","Risk reduction","Risk transfer","Risk avoidance"],[3]],
+["What is an IP address spoofing attack?",["When a threat actor obtains a secret key","When a threat actor prevents normal use of a computer or network","When a threat actor captures and listens to network traffic","When a threat actor constructs an IP packet that appears to originate from a valid address inside the corporate intranet"],[3]],
+["Which tool is used to capture and analyze packets within traditional Ethernet LANs or WLANs?",["Hping","SuperScan","Aircrack-ng","Wireshark"],[3]],
+["Which agency is leading efforts to automate the sharing of cybersecurity information with public and private organizations in the US?",["NCSA","CISA","FBI","ENISA"],[1]],
+["What type of malware denies access to the infected computer system or its data, often by encrypting files?",["Scareware","Spyware","Ransomware","Adware"],[2]],
+["Which type of hacker uses their programming skills for good, ethical, and legal purposes?",["Black Hat hackers","White Hat hackers","Script kiddies","Gray Hat hackers"],[1]],
+["Which type of threat actor refers to teenagers or inexperienced threat actors running existing scripts, tools, and exploits, to cause harm, but typically not for profit?",["Hacktivists","Script kiddies","State-sponsored","Cybercriminals"],[1]],
+["What is malware designed to do?",["Damage, disrupt, steal, or inflict some other illegitimate action on data, hosts, or networks","Enhance system performance","Provide system updates","Improve network connectivity"],[0]],
+["What do access attacks exploit to gain entry into web accounts, confidential databases, and other sensitive information?",["User awareness and training","Known vulnerabilities in authentication services, FTP services, and web services","Strong encryption protocols","Physical security measures"],[1]],
+["What is the process that balances the operational costs of providing protective measures with the gains achieved by protecting the asset?",["Threat assessment","Security auditing","Risk management","Vulnerability analysis"],[2]],
+["What type of attack occurs when a threat actor captures and listens to network traffic?",["IP address spoofing","Denial-of-service (DoS) attack","Data modification attack","Eavesdropping attack"],[3]],
+["Which type of Trojan horse enables unauthorized remote access?",["Destructive","Proxy","Remote-access","Data-sending"],[2]],
+["Which type of threat actor is motivated to make money using any necessary means?",["Script kiddies","Cybercriminals","Hacktivists","Vulnerability brokers"],[1]],
+["Which malware attempts to convince people to divulge sensitive information, often through fake emails?",["Spyware","Adware","Phishing","Rootkits"],[2]],
+["What are the evidence that an attack has occurred and each attack has unique identifiable attributes?",["Indicators of Attack (IOA)","Indicators Of Compromise (IOC)","Cyber Threat Indicators (CTI)","Threat Intelligence"],[1]],
+["Which of the following is a common symptom of a computer infected with malware?",["Increased computer speed","Reduced CPU and/or memory usage","Antivirus and firewall programs functioning normally","Emails spontaneously being sent without your knowledge"],[3]],
+["What is the main goal of a Denial-of-service (DoS) attack?",["To prevent normal use of a computer or network by valid users","To steal sensitive data","To modify data in transit","To gain unauthorized access to a system"],[0]],
+["Which of the following is a password cracker tool?",["John the Ripper","Wireshark","Nmap","Metasploit"],[0]],
+["Which organization defines unique CVE Identifiers for publicly known information-security vulnerabilities that make it easier to share data?",["FireEye","Cisco Talos","DHS","MITRE"],[3]],
+["When a security audit is performed at a company, the auditor reports that new users have access to network resources beyond their normal job roles. Additionally, users who move to different positions retain their prior permissions. What kind of violation is occurring?",["audit","network policy","least privilege","password"],[2]],
+["Which term describes the ability of a web server to keep a log of the users who access the server, as well as the length of time they use it?",["authorization","assigning permissions","authentication","accounting"],[3]],
+["What is the benefit of a defense-in-depth approach?",["All network vulnerabilities are mitigated.","The effectiveness of other security measures is not impacted when a security mechanism fails.","Only a single layer of security at the network core is required.","The need for firewalls is eliminated."],[1]],
+["What is a weakness in a system or its design that could be exploited by a threat?",["Vulnerability","Exploit","Threat","Risk"],[0]],
+["What is the first stage of a reconnaissance attack?",["Initiate a port scan","Perform an information query of a target","Run exploitation tools","Run vulnerability scanners"],[1]],
+["What is a Man-in-the-middle (MiTM) attack?",["An attack that prevents normal use of a computer or network","An attack where a threat actor obtains a secret key","An attack where threat actors have positioned themselves between a source and destination","An attack where a threat actor constructs an IP packet that appears to originate from a valid address"],[2]],
+["Which type of attack involves a threat actor obtaining the credentials for a valid user account?",["Password-based attacks","IP address spoofing","Data modification attack","Sniffer attack"],[0]],
+["What is a key characteristic of computer worms compared to viruses?",["They require a host program to run","They only spread through email attachments","They are always harmless","They replicate themselves by independently exploiting vulnerabilities in networks"],[3]],
+["Which type of malware spreads by inserting a copy of itself into another program?",["Trojan horse","Virus","Worm","Ransomware"],[1]],
+["What is a Trojan horse malware?",["Malware that denies access to the infected computer system or its data","A program that displays annoying pop-ups","A self-replicating program that exploits network vulnerabilities","Software that appears to be legitimate, but it contains malicious code"],[3]],
+["What is a potential danger to an asset such as data or the network itself?",["Exploit","Risk","Vulnerability","Threat"],[3]],
+["What is the mechanism used to leverage a vulnerability to compromise an asset?",["Threat","Exploit","Risk","Vulnerability"],[1]],
+["What is a sniffer attack?",["An attack that exploits software vulnerabilities","An application or device that can read, monitor, and capture network data exchanges","An attack that modifies data in packets","An attack that prevents access to a system"],[1]]
+];
+let mode='quiz',done=false,order=D.map((_,i)=>i),sel={},current=0,reviewed={};
+const $=id=>document.getElementById(id);
+const same=(s,a)=>s.size===a.length&&a.every(x=>s.has(x));
+function render(){
+  const el=$('list');el.innerHTML='';
+  const qi=order[current];
+  const reveal=mode==='study'||done||!!reviewed[qi];
+  const [q,o,a,note]=D[qi];const multi=a.length>1;
+  const s=sel[qi]||(sel[qi]=new Set());
+  const c=document.createElement('div');c.className='card';
+  const progress=document.createElement('div');progress.className='progress';
+  progress.innerHTML='<span>Question '+(current+1)+' of '+order.length+'</span><span class="progress-track"><span style="width:'+(((current+1)/order.length)*100)+'%"></span></span>';
+  c.appendChild(progress);
+  const h=document.createElement('p');h.className='q';h.textContent=(current+1)+'. '+q;c.appendChild(h);
+  o.forEach((t,j)=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=t;
+    if(reveal&&a.includes(j))b.classList.add('ok');
+    else if((done||reviewed[qi])&&s.has(j))b.classList.add('bad');
+    else if(!reveal&&s.has(j))b.classList.add('on');
+    b.onclick=()=>{if(reveal)return;if(multi){s.has(j)?s.delete(j):s.add(j)}else{s.clear();s.add(j)}render()};
+    c.appendChild(b);
+  });
+  if(note&&reveal){const p=document.createElement('p');p.className='note';p.textContent=note;c.appendChild(p)}
+  el.appendChild(c);
+
+  const nav=document.createElement('div');nav.className='navigation';
+  const prev=document.createElement('button');prev.className='btn';prev.textContent='Previous';prev.disabled=current===0;prev.onclick=()=>{current--;render();window.scrollTo(0,0)};
+  const next=document.createElement('button');next.className='btn pri';
+  next.textContent=reviewed[qi]?(current===order.length-1?'Finished':'Next'):'Show answer';
+  next.disabled=reviewed[qi]&&current===order.length-1;
+  next.onclick=()=>{
+    if(!reviewed[qi]){
+      reviewed[qi]=true;
+      render();
+    }else if(current<order.length-1){
+      current++;
+      render();
+      window.scrollTo(0,0);
+    }
+  };
+  nav.append(prev,next);el.appendChild(nav);
+
+  $('mQuiz').classList.toggle('on',mode==='quiz');
+  $('mStudy').classList.toggle('on',mode==='study');
+  $('sub').style.display=mode==='quiz'?'':'none';
+  $('sub').disabled=done;
+  if(done){const r=D.filter((d,i)=>same(sel[i]||new Set(),d[2])).length;$('score').textContent='Score: '+r+' / '+D.length}
+  else if(mode==='quiz'){const k=Object.values(sel).filter(s=>s.size).length;$('score').textContent='Answered: '+k+' / '+D.length}
+  else $('score').textContent='';
+}
+function setMode(m){mode=m;done=false;sel={};reviewed={};current=0;render();window.scrollTo(0,0)}
+$('mQuiz').onclick=()=>setMode('quiz');
+$('mStudy').onclick=()=>setMode('study');
+$('sub').onclick=()=>{done=true;render();window.scrollTo(0,0)};
+$('rst').onclick=()=>{done=false;sel={};reviewed={};order=D.map((_,i)=>i);current=0;render();window.scrollTo(0,0)};
+$('shuf').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}done=false;sel={};reviewed={};current=0;render();window.scrollTo(0,0)};
+$('dark').onclick=()=>{const r=document.documentElement;const d=r.dataset.theme==='dark';r.dataset.theme=d?'light':'dark';$('dark').textContent=d?'Dark mode':'Light mode'};
+$('acc').oninput=e=>document.documentElement.style.setProperty('--acc',e.target.value);
+if(matchMedia('(prefers-color-scheme: dark)').matches){document.documentElement.dataset.theme='dark';$('dark').textContent='Light mode'}
+render();
+</script>
+</body>
+</html>
